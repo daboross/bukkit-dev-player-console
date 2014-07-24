@@ -1,0 +1,6 @@
+name: ${project.name}
+main: net.daboross.bukkitdev.devtest.DevTestPlugin
+version: ${project.version}
+author: Dabo Ross
+description: ${project.description}
+url: ${project.url}
