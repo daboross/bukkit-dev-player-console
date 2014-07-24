@@ -79,6 +79,7 @@ public class DevTestPlugin extends JavaPlugin {
             }
 
             sender.sendMessage(String.valueOf(result));
+            System.out.println(result);
             bindings.put("result", result);
         }
         return true;
