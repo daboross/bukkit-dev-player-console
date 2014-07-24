@@ -35,7 +35,9 @@ public class DevTestPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        engine = new ScriptEngineManager().getEngineByExtension("javascript");
+        ScriptEngineManager manager = new ScriptEngineManager();
+
+        engine = manager.getEngineByName("rhino");
         bindings = engine.getBindings(ScriptContext.ENGINE_SCOPE);
         bindings.put("skywars", getServer().getPluginManager().getPlugin("SkyWars"));
         bindings.put("server", getServer());
@@ -62,16 +64,22 @@ public class DevTestPlugin extends JavaPlugin {
             for (String str : args) {
                 currentText.append(str);
             }
-            Object result;
             bindings.put("player", sender);
+
+            String text = currentText.toString();
+            currentText = new StringBuilder();
+
+            Object result;
             try {
-                result = engine.eval(currentText.toString());
+                result = engine.eval(text);
             } catch (ScriptException ex) {
                 getLogger().log(Level.SEVERE, "Error", ex);
+                sender.sendMessage(ChatColor.RED + "Error");
                 return true;
             }
+
+            sender.sendMessage(String.valueOf(result));
             bindings.put("result", result);
-            currentText = new StringBuilder();
         }
         return true;
     }
