@@ -37,9 +37,11 @@ public class DevTestPlugin extends JavaPlugin {
     public void onEnable() {
         ScriptEngineManager manager = new ScriptEngineManager();
 
-        engine = manager.getEngineByName("rhino");
+        engine = manager.getEngineByName("nashorn");
         bindings = engine.getBindings(ScriptContext.ENGINE_SCOPE);
-        bindings.put("skywars", getServer().getPluginManager().getPlugin("SkyWars"));
+        if (getServer().getPluginManager().isPluginEnabled("SkyWars")) {
+            bindings.put("skywars", getServer().getPluginManager().getPlugin("SkyWars"));
+        }
         bindings.put("server", getServer());
     }
 

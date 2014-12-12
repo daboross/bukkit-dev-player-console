@@ -60,11 +60,6 @@
             <version>1.7.9-R0.2</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>rhino</groupId>
-            <artifactId>rhino</artifactId>
-            <version>1.5R4.1</version>
-        </dependency>
     </dependencies>
 
     <build>
